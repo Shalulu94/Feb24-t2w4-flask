@@ -1,5 +1,6 @@
 from init import db, ma
 
+
 class User(db.Model):
     # name of the table
     __tablename__ = "users"
@@ -11,13 +12,14 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-    class UserSchema(ma.Schema):
-        class Meta:
-            fields = ("id", "name", "email", "password", "is_admin")
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "name", "email", "password", "is_admin")
 
 
-# schema to handle a single user object
+# to handle a single user object
 user_schema = UserSchema(exclude=["password"])
 
-# schema to handle a list of user objects
+# to handle a list of user objects
 users_schema = UserSchema(many=True, exclude=["password"])
